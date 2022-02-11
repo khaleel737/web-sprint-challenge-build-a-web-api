@@ -10,8 +10,11 @@ const projectsRouter = require('./projects/projects-router')
 // Do NOT `server.listen()` inside this file!
 
 server.use(express.json());
-server.use(`/api/actions`, actionsRouter);
-server.use(`/api/projects`, projectsRouter);
+// server.use(`/api/actions`, actionsRouter);
+// server.use(`/api/projects`, projectsRouter);
+
+server.use('/api/actions', actionsRouter)
+server.use('/api/projects', projectsRouter)
 
 
 server.get(`/`, (req, res) => {
@@ -22,5 +25,9 @@ server.get(`/`, (req, res) => {
     there is no data on that route, just write some code, you'll sort it out… don't worry, just hack it…
     I need this code, but don't know where, perhaps should make some middleware, don't worry, just hack it</h2>`);
 });
+
+server.use('*', (req, res) => {
+res.status(404).json(`{ message: ${req.method} ${req.baseUrl} not found!`)
+})
 
 module.exports = server;
