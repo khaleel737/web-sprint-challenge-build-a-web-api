@@ -14,20 +14,21 @@ router.get('/:id', async (req, res) => {
     if(!projectID){
         res.status(404).json({ message: `Project with this ID not found` })
     }else{
-        res.json(req.project)
+        res.json(projectID)
         }
 
 
     }) 
 
     router.post('/', async (req, res) => {
-        let { name, description } = req.body
-        const newProject = await Projects.insert(req.body)
-        if(!name && !name.trim() || !description && !description.trim()) {
+        const { name, description } = req.body
+        if(!name || !description) {
             res.status(400).json({ message: `Project  not found` })
         } else {
-             res.json(newProject)
-        }   
+
+            const newProject = await Projects.insert(req.body)
+            res.json(newProject)
+        }
     })
 
     router.put('/:id',  async (req, res) => {

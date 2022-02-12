@@ -1,25 +1,27 @@
 // Write your "projects" router here!
 const express = require(`express`);
 const Actions = require(`./actions-model`);
+const  { validateActionId, validateActionInsert } = require(`./actions-middleware`)
 const router = express.Router();
-// const  { validateProjectID } = require(`./projects-middleware`)
 
-router.get('/',  async (req, res) => {
-const allActions = await Actions.get(req.params.id)
-res.status(200).json(allActions)
+router.get('/',  validateActionId, (req, res) => {
+// const allActions =  Actions.get(req.params.id)
+// res.status(200).json(allActions)
+res.json(req.actions)
 }) 
 
-router.get('/:id', async (req, res) => {
-    const actionID = await Actions.get(req.params.id);
-    if(!actionID){
-        res.status(404).json({ message: `Project with this ID not found` })
-    }else{
-        res.json(actionID)
-    }
+router.get('/:id', validateActionId, (req, res) => {
+    // const actionID = await Actions.get(req.params.id);
+    // if(!actionID){
+    //     res.status(404).json({ message: `Project with this ID not found` })
+    // }else{
+    //     res.json(actionID)
+    // }
+    res.json(req.actions)
+
 
 
     }) 
-
     router.post('/', async (req, res) => {
         let { description, notes } = req.body
 
@@ -31,7 +33,7 @@ router.get('/:id', async (req, res) => {
              res.json(newAction)
         }   
         // res.json(newAction)
-
+        // res.json(req.insert)
     })
 
     router.put('/:id', async (req, res) => {
