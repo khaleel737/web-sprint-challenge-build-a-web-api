@@ -147,7 +147,21 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+Router, Middleware, Validation, setting up Environment.
+
 1. Understand and explain the use of Middleware.
+
+Functions that validate and have access to the request and response objects.
+
 1. The basic principles of the REST architectural style.
+
+Design of set of rules to be used for creating web services, it allows systems to access and manipulate web resources by using a uniform and predefined set of rules.
+
 1. Understand and explain the use of Express Routers.
+
+A URL path/patter function used to handle requests through different routes and patterns.
+
 1. Describe tooling used to manually test the correctness of an API.
+
+HTTPie or newman can be used locally to test GET, POST, PUT, DELETE functions.
