@@ -2,7 +2,6 @@
 const express = require(`express`);
 const Projects = require(`./projects-model`);
 const router = express.Router();
-const  { validateProjectID } = require(`./projects-middleware`)
 
 router.get('/',  async (req, res) => {
 const allProjects = await Projects.get(req.params.id)
@@ -32,10 +31,11 @@ router.get('/:id', async (req, res) => {
     })
 
     router.put('/:id',  async (req, res) => {
-        let { name, description } = req.body
-
-
+        
         const updateProject = await Projects.update(req.params.id, req.body)
+        
+        let { name, description } = req.body
+        
         if(!req.params.id) {
             res.status(404).json({ message: `Project with ID cannot insert` })
         }  if (!name || !description) {

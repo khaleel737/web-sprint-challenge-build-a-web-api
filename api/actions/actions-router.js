@@ -32,18 +32,18 @@ router.get('/:id', validateActionId, (req, res) => {
         } else {
              res.json(newAction)
         }   
-        // res.json(newAction)
-        // res.json(req.insert)
+        
     })
 
     router.put('/:id', async (req, res) => {
-        let { description, notes } = req.body
-
 
         const updatedAction = await Actions.update(req.params.id, req.body)
-        if(!req.params.id) {
+        
+        
+        let { notes, description, completed, project_id } = req.body
+        if(!notes || !description || !completed ||!project_id) {
             res.status(404).json({ message: `Project with ID cannot insert` })
-        }  if (!description || !notes) {
+        }  if (!req.body) {
             res.status(400).json({ message: `Project  missing name or content` })
         } else {
              res.json(updatedAction)
@@ -52,7 +52,6 @@ router.get('/:id', validateActionId, (req, res) => {
 
 
     router.delete('/:id', async (req, res) => {
-        // let { name, description } = req.body
 
 
         const deleteAction = await Actions.remove(req.params.id)
