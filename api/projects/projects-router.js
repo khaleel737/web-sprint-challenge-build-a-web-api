@@ -10,12 +10,12 @@ res.status(200).json(allProjects)
 }) 
 
 router.get('/:id', async (req, res) => {
-    const projectID = await Projects.get(req.params.id);
+    const projectID =  await Projects.get(req.params.id);
     if(!projectID){
         res.status(404).json({ message: `Project with this ID not found` })
     }else{
-        res.json(projectID)
-    }
+        res.json(req.project)
+        }
 
 
     }) 
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
         }   
     })
 
-    router.put('/:id', async (req, res) => {
+    router.put('/:id',  async (req, res) => {
         let { name, description } = req.body
 
 
